@@ -2,6 +2,8 @@
 
 - Create React app
 - Configured Taliwindcss
+- Header
+- Login Form
 
 
 # Features
