@@ -3,8 +3,11 @@
 - Create React app
 - Configured Taliwindcss
 - Header
+- Routing of app
 - Login Form
-
+- Sign up form
+- Form validation
+- useRef hook
 
 # Features
 - Login/Sign up
