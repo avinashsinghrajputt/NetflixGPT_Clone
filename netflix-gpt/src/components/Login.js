@@ -1,18 +1,77 @@
 import React, { useRef,useState } from 'react';
 import Header from './Header';
 import { checkValidate } from '../utils/validate';
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
+
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   
-  const Name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+  const name = useRef(null);
 
   const handleButtonClick = () => {
-    const message =  checkValidate(email.current.value, password.current.value, Name.current.value);
+    const message =  checkValidate(email.current.value, password.current.value);
     setErrorMessage(message);
+    if(message) return;
+
+    //Sign in sign up logic
+
+    if(!isSignInForm){
+      //signup logic
+      createUserWithEmailAndPassword(
+        auth, 
+        email.current.value, 
+        password.current.value
+      )
+  .then((userCredential) => {
+    const user = userCredential.user;
+    updateProfile(user, {
+      displayName: name.current.value, photoURL: "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
+    }).then(() => {
+      const {uid,email,displayName,photoURL} = auth.currentUser;
+              dispatch(addUser({
+                uid:uid,
+                email:email,
+                displayName:displayName,
+                photoURL:photoURL})
+            );
+
+      navigate("/browse");
+    }).catch((error) => {
+      setErrorMessage(error.message);
+    });
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode+"-"+errorMessage);
+  });
+
+    }else{
+      //signin logic
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user);
+    navigate("/browse");
+
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode+"-"+errorMessage);
+  });
+
+    }
 
   };
 
@@ -34,7 +93,7 @@ const Login = () => {
         
         {!isSignInForm && (
         <input
-          ref={Name}
+          ref={name}
           type="text"
           placeholder="Full Name"
           className="p-4 my-4 w-full bg-gray-700" />)}
