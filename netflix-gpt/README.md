@@ -13,6 +13,14 @@
 - Create Signup user account
 - implement Sign in user api
 - created Redux store with userslice
+- implemenated sign out
+- update profile
+- Fetch from TmBD movies
+- BugFix : Sign up user displayed and profilepicture udpdate
+- BugFix: if the user is not logged in redirect / browse to login page and vice-versa
+- Unsubscribed to the onAuthStateChanged callback
+- add hardcoded values to the constants file
+
 
 # Features
 - Login/Sign up
