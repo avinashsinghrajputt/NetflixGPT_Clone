@@ -20,6 +20,7 @@
 - BugFix: if the user is not logged in redirect / browse to login page and vice-versa
 - Unsubscribed to the onAuthStateChanged callback
 - add hardcoded values to the constants file
+- Register TMBD API & create an app & get access token
 
 
 # Features
