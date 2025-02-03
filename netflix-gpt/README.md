@@ -21,6 +21,15 @@
 - Unsubscribed to the onAuthStateChanged callback
 - add hardcoded values to the constants file
 - Register TMBD API & create an app & get access token
+- Get data from TMBD now playing movies list api
+- Custom hook for now playing movie
+- create movieslice
+- update store with movies data
+- planning for Maincontainer and secondrycontainer
+- fetch data for tailer video
+- update store with trailer video data
+- Embadded the youtube video and make it autoplay and mute the video 
+- Tailwind clASSES to make main container look awesome
 
 
 # Features
