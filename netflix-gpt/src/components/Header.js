@@ -47,7 +47,7 @@ const Header = () => {
       <img
       className="w-44"
       src={LOGO} 
-      alt="logo" 
+      alt="netlogo" 
       />
       {user &&(
       <div className='flex p-2'>
